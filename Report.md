@@ -158,8 +158,6 @@ DeviceNetworkEvents
 
 ## Chronological Event Timeline 
 
-# Chronological Timeline of Events
-
 ### 1. File Download – TOR Installer
 
 * **Timestamp:** `2026-06-03T19:28:07Z`
