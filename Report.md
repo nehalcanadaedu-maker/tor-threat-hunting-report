@@ -232,7 +232,49 @@ DeviceNetworkEvents
 * **Process Path:** `C:\Users\nehal\Desktop\Tor Browser\Browser\firefox.exe`
 
 ---
+---
 
+## Related Queries:
+```kql
+// Installer name == tor-browser-windows-x86_64-portable-(version).exe
+// Detect the installer being downloaded
+DeviceFileEvents
+| where FileName startswith "tor"
+```
+```kql
+// TOR Browser being silently installed
+// Take note of two spaces before the /S (I don't know why)
+DeviceProcessEvents
+| where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe  /S"
+| project Timestamp, DeviceName, ActionType, FileName, ProcessCommandLine
+```
+
+// TOR Browser or service was successfully installed and is present on the disk
+DeviceFileEvents
+| where FileName has_any ("tor.exe", "firefox.exe")
+| project  Timestamp, DeviceName, RequestAccountName, ActionType, InitiatingProcessCommandLine
+
+// TOR Browser or service was launched
+DeviceProcessEvents
+| where ProcessCommandLine has_any("tor.exe","firefox.exe")
+| project  Timestamp, DeviceName, AccountName, ActionType, ProcessCommandLine
+
+// TOR Browser or service is being used and is actively creating network connections
+DeviceNetworkEvents
+| where InitiatingProcessFileName in~ ("tor.exe", "firefox.exe")
+| where RemotePort in (9001, 9030, 9040, 9050, 9051, 9150)
+| project Timestamp, DeviceName, InitiatingProcessAccountName, InitiatingProcessFileName, RemoteIP, RemotePort, RemoteUrl
+| order by Timestamp desc
+
+```kql
+// User shopping list was created and, changed, or deleted
+DeviceFileEvents
+| where FileName contains "shopping-list.txt"
+```
+
+<img width="1535" height="195" alt="Screenshot 2026-06-04 001506" src="https://github.com/user-attachments/assets/58988ae2-a2c1-442e-bdbe-c999bcf2da51" />
+
+---
 ## Summary
 
 The user "nehal" on the "nehalwindows11" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `tor-shopping-list.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "shopping list" file.
