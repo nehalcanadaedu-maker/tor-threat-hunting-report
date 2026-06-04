@@ -3,7 +3,7 @@
 
 ## Steps the "Bad Actor" took Create Logs and IoCs:
 1. Download the TOR browser installer: https://www.torproject.org/download/
-2. Install it silently: ```tor-browser-windows-x86_64-portable-14.0.1.exe /S```
+2. Install it silently: ```tor-browser-windows-x86_64-portable-15.0.15.exe /S```
 3. Opens the TOR browser from the folder on the desktop
 4. Connect to TOR and browse a few sites. You can find a valid onion linke here, just look for one that is up/active: https://onion.live/
 — The following are OUT OF DATE, but the links will look something like this:
