@@ -241,6 +241,8 @@ DeviceNetworkEvents
 DeviceFileEvents
 | where FileName startswith "tor"
 ```
+<img width="1221" height="197" alt="image" src="https://github.com/user-attachments/assets/aba8f1c1-b67c-4c13-86dd-a1890c5d9ba5" />
+
 ```kql
 // TOR Browser being silently installed
 // Take note of two spaces before the /S (I don't know why)
@@ -248,23 +250,36 @@ DeviceProcessEvents
 | where ProcessCommandLine contains "tor-browser-windows-x86_64-portable-14.0.1.exe  /S"
 | project Timestamp, DeviceName, ActionType, FileName, ProcessCommandLine
 ```
+<img width="1190" height="256" alt="image" src="https://github.com/user-attachments/assets/1ea38d96-982d-4fbd-84d0-d33f76ad7a25" />
 
+
+```kql
 // TOR Browser or service was successfully installed and is present on the disk
 DeviceFileEvents
 | where FileName has_any ("tor.exe", "firefox.exe")
 | project  Timestamp, DeviceName, RequestAccountName, ActionType, InitiatingProcessCommandLine
+```
+<img width="1266" height="207" alt="image" src="https://github.com/user-attachments/assets/e0e65df6-e18c-40ff-801a-f86bb97f036a" />
 
+
+```kql
 // TOR Browser or service was launched
 DeviceProcessEvents
 | where ProcessCommandLine has_any("tor.exe","firefox.exe")
 | project  Timestamp, DeviceName, AccountName, ActionType, ProcessCommandLine
+```
+<img width="1205" height="297" alt="image" src="https://github.com/user-attachments/assets/6568dc92-bec7-4fe0-ab6c-bdf3d680c2da" />
 
+
+```kql
 // TOR Browser or service is being used and is actively creating network connections
 DeviceNetworkEvents
 | where InitiatingProcessFileName in~ ("tor.exe", "firefox.exe")
 | where RemotePort in (9001, 9030, 9040, 9050, 9051, 9150)
 | project Timestamp, DeviceName, InitiatingProcessAccountName, InitiatingProcessFileName, RemoteIP, RemotePort, RemoteUrl
 | order by Timestamp desc
+```
+<img width="1268" height="205" alt="image" src="https://github.com/user-attachments/assets/380a5aba-3960-4bfd-8010-2b4176a13867" />
 
 ```kql
 // User shopping list was created and, changed, or deleted
