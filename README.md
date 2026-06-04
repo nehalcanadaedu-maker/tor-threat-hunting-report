@@ -69,6 +69,8 @@ DeviceNetworkEvents
 // User shopping list was created and, changed, or deleted
 DeviceFileEvents
 | where FileName contains "shopping-list.txt"
+<img width="1535" height="195" alt="Screenshot 2026-06-04 001506" src="https://github.com/user-attachments/assets/b4f54a5d-c714-4e22-8774-42923a597db1" />
+
 ```
 
 ---
