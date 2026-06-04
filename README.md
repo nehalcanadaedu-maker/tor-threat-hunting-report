@@ -79,6 +79,3 @@ DeviceFileEvents
 - **Date**: June 06, 2026
 
 
-| **Version** | **Changes**                   | **Date**         | **Modified By**   |
-|-------------|-------------------------------|------------------|-------------------|
-| 1.0         | Initial draft                  | `September  6, 2024`  | `Josh Madakor`   
