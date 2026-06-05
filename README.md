@@ -1,44 +1,78 @@
-# Threat Event (Unauthorized TOR Usage)
-**Unauthorized TOR Browser Installation and Use**
+# Threat Hunting Scenario: Unauthorized TOR Browser Usage
 
-## Steps the "Bad Actor" took Create Logs and IoCs:
-1. Download the TOR browser installer: https://www.torproject.org/download/
-2. Install it silently: ```tor-browser-windows-x86_64-portable-15.0.15.exe /S```
-3. Opens the TOR browser from the folder on the desktop
-4. Connect to TOR and browse a few sites. You can find a valid onion linke here, just look for one that is up/active: https://onion.live/
-— The following are OUT OF DATE, but the links will look something like this:
-   - Current Dread Forum: ```g66ol3eb5ujdckzqqfmjsbpdjufmjd5nsgdipvxmsh7rckzlhywlzlqd.onion```
-   - Dark Markets Forum: ```g66ol3eb5ujdckzqqfmjsbpdjufmjd5nsgdipvxmsh7rckzlhywlzlqd.onion/d/DarkNetMarkets```
-   - Current Elysium Market: ```https://elysiumutkwscnmdohj23gkcyp3ebrf4iio3sngc5tvcgyfp4nqqmwad.top/login```
-7. Create a folder on your desktop called ```tor-shopping-list.txt``` and put a few fake (illicit) items in there
-8. Delete the file.
+## Overview
+
+This threat hunting scenario focuses on detecting unauthorized installation and usage of the TOR Browser within a monitored Windows environment. TOR may be used to bypass organizational network controls, conceal network activity, or communicate through anonymized channels. The objective of this exercise is to identify relevant telemetry, investigate indicators of compromise (IoCs), and validate detection logic using Microsoft Defender XDR and Microsoft Sentinel.
 
 ---
 
-## Tables Used to Detect IoCs:
-| **Parameter**       | **Description**                                                              |
-|---------------------|------------------------------------------------------------------------------|
-| **Name**| DeviceFileEvents|
-| **Info**|https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceinfo-table|
-| **Purpose**| Used for detecting TOR download and installation, as well as the shopping list creation and deletion. |
+## Simulated Activity
 
-| **Parameter**       | **Description**                                                              |
-|---------------------|------------------------------------------------------------------------------|
-| **Name**| DeviceProcessEvents|
-| **Info**|https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceinfo-table|
-| **Purpose**| Used to detect the silent installation of TOR as well as the TOR browser and service launching.|
+The following actions were performed in an isolated lab environment to generate telemetry for analysis:
 
-| **Parameter**       | **Description**                                                              |
-|---------------------|------------------------------------------------------------------------------|
-| **Name**| DeviceNetworkEvents|
-| **Info**|https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-devicenetworkevents-table|
-| **Purpose**| Used to detect TOR network activity, specifically tor.exe and firefox.exe making connections over ports to be used by TOR (9001, 9030, 9040, 9050, 9051, 9150).|
+1. Download the TOR Browser installer from the official TOR Project website.
+2. Install the TOR Browser.
+3. Launch the TOR Browser.
+4. Generate network activity through the TOR network.
+5. Create a test file named `test_activity.txt` on the desktop.
+6. Modify and delete the test file to generate file system events.
+7. Review generated telemetry within Microsoft Defender XDR and Microsoft Sentinel.
 
+---
 
+## Detection Objectives
 
-## Created By:
-- **Author Name**: Nehal Patel
-- **Author Contact**: https://www.linkedin.com/in/nehal-patel-162490300/
-- **Date**: June 06, 2026
+* Detect TOR Browser download activity.
+* Identify TOR Browser installation events.
+* Detect TOR-related process execution.
+* Identify TOR-related network connections.
+* Detect file creation, modification, and deletion activity associated with the simulation.
+* Correlate process, file, and network telemetry during the investigation.
 
+---
+
+## Tables Used During Investigation
+
+| Parameter | Description                                                                   |
+| --------- | ----------------------------------------------------------------------------- |
+| Name      | DeviceFileEvents                                                              |
+| Purpose   | Detect file creation, modification, deletion, and TOR installation artifacts. |
+
+| Parameter | Description                                                               |
+| --------- | ------------------------------------------------------------------------- |
+| Name      | DeviceProcessEvents                                                       |
+| Purpose   | Detect TOR Browser installation, process execution, and related activity. |
+
+| Parameter | Description                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------- |
+| Name      | DeviceNetworkEvents                                                                                   |
+| Purpose   | Detect outbound network connections associated with TOR processes and analyze communication patterns. |
+
+---
+
+## Investigation Goals
+
+* Identify evidence of unauthorized software installation.
+* Correlate process execution with network activity.
+* Validate threat hunting queries and detection logic.
+* Develop investigation workflows for identifying anonymized network usage.
+* Improve organizational visibility into potentially unauthorized applications.
+
+---
+
+## Environment
+
+* Microsoft Defender XDR
+* Microsoft Sentinel
+* Windows 11 Lab Environment
+
+---
+
+## Author
+
+**Nehal Patel**
+
+LinkedIn: https://www.linkedin.com/in/nehal-patel-162490300/
+
+Date: June 2026
 
