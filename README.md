@@ -1,22 +1,12 @@
 # Threat Hunting Scenario: Unauthorized TOR Browser Usage
 
+> **Educational & Defensive Security Disclaimer**
+>
+> This repository is intended for cybersecurity education, threat hunting, and detection engineering purposes only. All activities were performed in an isolated lab environment. Any indicators, domains, IP addresses, filenames, or other artifacts are sanitized examples used for defensive analysis and training. The focus of this project is detection, investigation, and incident response from a blue-team perspective.
+
 ## Overview
 
 This threat hunting scenario focuses on detecting unauthorized installation and usage of the TOR Browser within a monitored Windows environment. TOR may be used to bypass organizational network controls, conceal network activity, or communicate through anonymized channels. The objective of this exercise is to identify relevant telemetry, investigate indicators of compromise (IoCs), and validate detection logic using Microsoft Defender XDR and Microsoft Sentinel.
-
----
-
-## Simulated Activity
-
-The following actions were performed in an isolated lab environment to generate telemetry for analysis:
-
-1. Download the TOR Browser installer from the official TOR Project website.
-2. Install the TOR Browser.
-3. Launch the TOR Browser.
-4. Generate network activity through the TOR network.
-5. Create a test file named `test_activity.txt` on the desktop.
-6. Modify and delete the test file to generate file system events.
-7. Review generated telemetry within Microsoft Defender XDR and Microsoft Sentinel.
 
 ---
 
