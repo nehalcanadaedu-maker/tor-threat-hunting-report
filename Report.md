@@ -3,6 +3,16 @@
 # Threat Hunt Report: Unauthorized TOR Usage
 - [Scenario Creation](https://github.com/nehalcanadaedu-maker/tor-threat-hunting-scenarios/blob/main/README.md)
 
+## Quick Navigation
+
+1. [Platforms and Languages Leveraged](#platforms-and-languages-leveraged)  
+2. [Scenario](#scenario)  
+3. [Investigation Steps](#steps-taken)  
+4. [Chronological Event Timeline](#chronological-event-timeline)  
+5. [Related Detection Queries](#related-queries)  
+6. [Investigation Summary](#summary)  
+7. [Response Taken](#response-taken)  
+
 ## Platforms and Languages Leveraged
 - Windows 11 Virtual Machines (Microsoft Azure)
 - EDR Platform: Microsoft Defender for Endpoint
