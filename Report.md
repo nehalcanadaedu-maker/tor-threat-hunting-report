@@ -164,82 +164,17 @@ DeviceNetworkEvents
 
 ---
 
-## Chronological Event Timeline 
+## Chronological Event Timeline
 
-### 1. File Download – TOR Installer
+| Timestamp (UTC)       | Event                                       | Action / Evidence                                                  | Process or File                                   | Additional Details                                                          |
+| --------------------- | ------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------- | --------------------------------------------------------------------------- |
+| `2026-06-03 19:28:07` | TOR installer downloaded                    | `FileRenamed` confirmed the browser download completed             | `tor-browser-windows-x86_64-portable-15.0.15.exe` | Saved to `C:\Users\nehal\Downloads\`                                        |
+| `2026-06-03 19:30:49` | TOR installer executed                      | `ProcessCreated` confirmed installation activity                   | `tor-browser-windows-x86_64-portable-15.0.15.exe` | Executed by user `nehal` from the Downloads directory                       |
+| `2026-06-03 19:31:13` | TOR Browser launched                        | Multiple TOR-related processes were created                        | `firefox.exe`, `tor.exe`                          | Processes originated from `C:\Users\nehal\Desktop\Tor Browser\`             |
+| `2026-06-03 19:32:05` | Initial local proxy connection failed       | `ConnectionFailed`                                                 | `firefox.exe`                                     | Connection attempted to `127.0.0.1:9150` while TOR was initializing         |
+| `2026-06-03 20:18:05` | TOR network communication established       | Multiple successful encrypted outbound connections over port `443` | `tor.exe`                                         | Connections observed to `38.180.153.222`, `64.65.0.11`, and `185.82.126.13` |
+| `2026-06-03 20:18:15` | Local SOCKS proxy communication established | `ConnectionSuccess`                                                | `firefox.exe`                                     | Browser connected to the TOR SOCKS proxy at `127.0.0.1:9150`                |
 
-* **Timestamp:** `2026-06-03T19:28:07Z`
-* **Event:** The user `nehal` downloaded the TOR browser installer through Microsoft Edge. Defender for Endpoint detected the completion of the download when the temporary `.crdownload` file was renamed to the final executable.
-* **Action:** File download completed.
-* **File Name:** `tor-browser-windows-x86_64-portable-15.0.15.exe`
-* **File Path:** `C:\Users\nehal\Downloads\tor-browser-windows-x86_64-portable-15.0.15.exe`
-
----
-
-### 2. Process Execution – TOR Browser Installer
-
-* **Timestamp:** `2026-06-03T19:30:49Z`
-* **Event:** The user `nehal` executed the TOR installer from the Downloads directory, initiating the TOR browser installation process on endpoint `nehalwindows11`.
-* **Action:** `ProcessCreated`
-* **Command:** `tor-browser-windows-x86_64-portable-15.0.15.exe`
-* **File Path:** `C:\Users\nehal\Downloads\tor-browser-windows-x86_64-portable-15.0.15.exe`
-
----
-
-### 3. Process Execution – TOR Browser Launch
-
-* **Timestamp:** `2026-06-03T19:31:13Z`
-* **Event:** User `nehal` launched the TOR browser successfully. Multiple TOR-related processes, including `firefox.exe` and `tor.exe`, were subsequently created.
-* **Action:** TOR browser process creation detected.
-* **Processes Observed:** `firefox.exe`, `tor.exe`
-* **TOR Process Path:** `C:\Users\nehal\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe`
-* **Browser Path:** `C:\Users\nehal\Desktop\Tor Browser\Browser\firefox.exe`
-
----
-
-### 4. Network Connections – TOR Network Activity
-
-* **Timestamp:** `2026-06-03T20:18:05Z`
-* **Event:** The TOR browser established multiple outbound encrypted network connections over port `443` using `tor.exe`, confirming active TOR network communication.
-* **Action:** `ConnectionSuccess`
-* **Remote IP Addresses Observed:**
-
-  * `38.180.153.222`
-  * `64.65.0.11`
-  * `185.82.126.13`
-* **Associated Domains:**
-
-  * `www.rmhvmxj5fhpx4ev7vqgq4.com`
-  * `www.55zazvhrxt4lmbb.com`
-  * `www.l5dcqpj.com`
-* **Process:** `tor.exe`
-* **Process Path:** `C:\Users\nehal\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe`
-
----
-
-### 5. Local TOR Proxy Communication
-
-* **Timestamp:** `2026-06-03T20:18:15Z`
-* **Event:** The TOR browser (`firefox.exe`) successfully established a local SOCKS proxy connection to `127.0.0.1` on port `9150`, a commonly used TOR proxy port.
-* **Action:** `ConnectionSuccess`
-* **Remote IP:** `127.0.0.1`
-* **Remote Port:** `9150`
-* **Process:** `firefox.exe`
-* **Process Path:** `C:\Users\nehal\Desktop\Tor Browser\Browser\firefox.exe`
-
----
-
-### 6. Failed TOR Initialization Connection
-
-* **Timestamp:** `2026-06-03T19:32:05Z`
-* **Event:** A failed connection attempt to the local TOR SOCKS proxy port (`9150`) was detected during the TOR browser initialization process.
-* **Action:** `ConnectionFailed`
-* **Remote IP:** `127.0.0.1`
-* **Remote Port:** `9150`
-* **Process:** `firefox.exe`
-* **Process Path:** `C:\Users\nehal\Desktop\Tor Browser\Browser\firefox.exe`
-
----
 ---
 
 ## Related Queries:
